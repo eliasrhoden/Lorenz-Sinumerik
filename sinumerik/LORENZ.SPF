@@ -1,0 +1,26 @@
+; Lorenz atractor equation
+; https://en.wikipedia.org/wiki/Lorenz_system  
+; 2021.11.20: E.R.
+;***********************************
+; STATE state vector R^3
+; d_STATE time derivative of state vector R^3
+;***********************************
+PROC LORENZ(VAR REAL STATE[3], VAR REAL d_STATE[3])
+DEF REAL BETA,SIGMA,RHO
+DEF REAL LX, LY, LZ
+
+; Lorenz param
+BETA = 8/3
+SIGMA = 10
+RHO = 28
+
+; System state
+LX = STATE[0]
+LY = STATE[1]
+LZ = STATE[2]
+
+d_STATE[0] = SIGMA*(LY - LX)
+d_STATE[1] = LX*(RHO - LZ) - LY
+d_STATE[2] = LX*LY - BETA*LZ
+
+RET

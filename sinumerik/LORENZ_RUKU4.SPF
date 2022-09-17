@@ -1,0 +1,38 @@
+; Runge-Kutta 4-th order step of Lorenz system
+; https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods
+; 2021.11.20: E.R.
+;********************************************'
+PROC LORENZ_RUKU4(VAR REAL STATE[3], VAR REAL STATE_PLUS[3], REAL DELTA)
+
+DEF REAL RK1[3], RK2[3], RK3[3], RK4[3]
+DEF REAL STATE_2[3], STATE_3[3], STATE_4[3]
+
+EXTERN LORENZ(VAR REAL[3], VAR REAL[3])
+
+; k_1 = lorenz(X)
+LORENZ(STATE,RK1)
+
+; k_2 = lorenz(X + k_1*h/2)
+STATE_2[0] = STATE[0] + RK1[0]*DELTA/2
+STATE_2[1] = STATE[1] + RK1[1]*DELTA/2
+STATE_2[2] = STATE[2] + RK1[2]*DELTA/2
+LORENZ(STATE_2, RK2)
+
+; k_3 = lorenz(X + k_2*h/2)
+STATE_3[0] = STATE[0] + RK2[0]*DELTA/2
+STATE_3[1] = STATE[1] + RK2[1]*DELTA/2
+STATE_3[2] = STATE[2] + RK2[2]*DELTA/2
+LORENZ(STATE_3, RK3)
+
+; k_4 = lorenz(X + h*k_3)
+STATE_4[0] = STATE[0] + RK3[0]*DELTA
+STATE_4[1] = STATE[1] + RK3[1]*DELTA
+STATE_4[2] = STATE[2] + RK3[2]*DELTA
+LORENZ(STATE_4, RK4)
+
+; x_plus = x + 1/6*h*(k_1 + 2*k_2 + 2*k_3 + k_4)
+STATE_PLUS[0] = STATE[0] + 1/6 * DELTA * (RK1[0] + 2*RK2[0] + 2*RK3[0] + RK4[0])
+STATE_PLUS[1] = STATE[1] + 1/6 * DELTA * (RK1[1] + 2*RK2[1] + 2*RK3[1] + RK4[1])
+STATE_PLUS[2] = STATE[2] + 1/6 * DELTA * (RK1[2] + 2*RK2[2] + 2*RK3[2] + RK4[2])
+
+RET
