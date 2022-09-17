@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np 
 
-
 def lorenz(X):
     x = X[0]
     y = X[1]
@@ -18,9 +17,7 @@ def lorenz(X):
 
     return np.array([dx,dy,dz])
 
-
 def ruku4(X,h):
-
     k_1 = lorenz(X)
     k_2 = lorenz(X + k_1*h/2)
     k_3 = lorenz(X + k_2*h/2)
@@ -49,8 +46,6 @@ def main():
         X = ruku4(X,h)
         Xs = np.vstack((Xs,X))
     
-        #Xs = np.array(Xs)
-
         plt.clf()
         ax = fig.add_subplot(111, projection='3d')
         ax.plot(Xs[:,0],Xs[:,1],Xs[:,2])
@@ -65,7 +60,6 @@ def main():
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
     plt.show()
-
 
 if __name__ == '__main__':
     main()
