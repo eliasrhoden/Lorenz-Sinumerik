@@ -14,7 +14,7 @@ $$
 Paramz from Lorenz: $\sigma = 10$, $\beta =  8/3$ and $\rho=28$
 
 
-## Runke-Kutta 4th order 
+## Runge-Kutta 4th order 
 
 [Runge Kutta methods Wikipedia](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods)
 
